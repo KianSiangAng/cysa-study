@@ -4,6 +4,8 @@ import { domainOf, type DomainId, type Flashcard, type Question } from './types.
 export const SESSION_SIZE = 10
 export const MAX_FLASHCARDS = 4
 export const MAX_REVIEWS = 7
+/** New flashcards introduced per session (after due ones), so cards actually enter the rotation. */
+export const NEW_FLASHCARDS = 2
 
 export interface SessionEntry {
   kind: 'question' | 'flashcard'
@@ -27,7 +29,7 @@ export interface SessionInput {
 
 /**
  * Build a commute session:
- *  1. due flashcards first (most overdue, at most MAX_FLASHCARDS)
+ *  1. due flashcards first (most overdue), then up to NEW_FLASHCARDS new ones; MAX_FLASHCARDS in total
  *  2. due questions, up to MAX_REVIEWS reviews in total
  *  3. new questions picked by exam domain weight
  *  4. gaps: more due questions → least-recently-seen questions → new flashcards (cap still applies)
@@ -43,8 +45,11 @@ export function buildSession(input: SessionInput): SessionEntry[] {
   const byDue = (a: { id: string }, b: { id: string }) => srs[a.id].dueAt - srs[b.id].dueAt
 
   const flash: Flashcard[] = fcs.filter((f) => isDue(srs[f.id], now)).sort(byDue).slice(0, MAX_FLASHCARDS)
+  const newCards = fcs.filter((f) => !srs[f.id])
+  flash.push(...newCards.splice(0, Math.min(NEW_FLASHCARDS, MAX_FLASHCARDS - flash.length)))
+  const reviewCount = flash.filter((f) => srs[f.id]).length
   const dueQs = qs.filter((q) => isDue(srs[q.id], now)).sort(byDue)
-  const picked: Question[] = dueQs.splice(0, Math.max(0, MAX_REVIEWS - flash.length))
+  const picked: Question[] = dueQs.splice(0, Math.max(0, MAX_REVIEWS - reviewCount))
   const room = () => size - flash.length - picked.length
 
   // New questions, weighted by domain.
@@ -71,8 +76,7 @@ export function buildSession(input: SessionInput): SessionEntry[] {
     picked.push(...seen.slice(0, room()))
   }
   if (room() > 0 && flash.length < MAX_FLASHCARDS) {
-    const newCards = fcs.filter((f) => !srs[f.id])
-    flash.push(...newCards.slice(0, Math.min(room(), MAX_FLASHCARDS - flash.length)))
+    flash.push(...newCards.splice(0, Math.min(room(), MAX_FLASHCARDS - flash.length)))
   }
 
   return [

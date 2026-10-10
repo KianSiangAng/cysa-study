@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildSession, MAX_FLASHCARDS, SESSION_SIZE } from './session.ts'
+import { buildSession, MAX_FLASHCARDS, NEW_FLASHCARDS, SESSION_SIZE } from './session.ts'
 import type { SrsEntry, SrsState } from './srs.ts'
 import type { Flashcard, Question } from './types.ts'
 
@@ -54,6 +54,20 @@ describe('buildSession', () => {
     expect(s.filter((e) => e.kind === 'flashcard')).toHaveLength(MAX_FLASHCARDS)
     expect(s.slice(0, 4).every((e) => e.kind === 'flashcard')).toBe(true)
     expect(s.slice(0, 4).map((e) => e.id)).toEqual(['fc-1.1-008', 'fc-1.1-007', 'fc-1.1-006', 'fc-1.1-005'])
+  })
+
+  it('introduces up to 2 new flashcards per session, after due ones, still first', () => {
+    const flashcards = range(6).map((n) => card('1.1', n))
+    const questions = range(20).map((n) => question('1.1', n))
+    const fresh = buildSession({ ...base, questions, flashcards, srs: {} })
+    expect(fresh.slice(0, NEW_FLASHCARDS).every((e) => e.kind === 'flashcard')).toBe(true)
+    expect(fresh.filter((e) => e.kind === 'flashcard')).toHaveLength(NEW_FLASHCARDS)
+    expect(fresh).toHaveLength(SESSION_SIZE)
+
+    const srs: SrsState = { [flashcards[0].id]: due(1), [flashcards[1].id]: due(2), [flashcards[2].id]: due(3) }
+    const mixed = buildSession({ ...base, questions, flashcards, srs })
+    expect(mixed.slice(0, 4).map((e) => e.id)).toEqual(['fc-1.1-003', 'fc-1.1-002', 'fc-1.1-001', 'fc-1.1-004'])
+    expect(mixed[4].kind).toBe('question')
   })
 
   it('never exceeds 4 flashcards even when questions run out', () => {
