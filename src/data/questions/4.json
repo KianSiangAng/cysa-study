@@ -1,1 +1,83 @@
-[]
+[
+  {
+    "id": "4.2-001",
+    "examVersion": "CS0-004",
+    "objective": "4.2",
+    "type": "scenario",
+    "difficulty": 2,
+    "stem": "A day-shift analyst receives this handover note. What is the MOST important information missing from it?",
+    "artifact": "Shift handover - night -> day\nAnalyst: m.rahman\nNotes: \"Busy night, a few phishing reports, one host acting weird.\nShould be fine. Ping me if anything.\"",
+    "options": [
+      {
+        "id": "a",
+        "text": "A list of open incidents and their status, active alerts, and pending actions with owners",
+        "why": "Correct. Without it, the next shift starts blind and work in progress gets dropped."
+      },
+      {
+        "id": "b",
+        "text": "The night-shift analyst's personal opinion of the shift",
+        "why": "Subjective impressions don't help the next analyst act."
+      },
+      {
+        "id": "c",
+        "text": "Full packet captures from the whole shift",
+        "why": "Raw data belongs in the case or evidence store, not in the handover summary."
+      },
+      {
+        "id": "d",
+        "text": "Every false positive closed in the past month",
+        "why": "Historical noise isn't what the incoming shift needs to act on now."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "A good shift handover documents open incidents, active alerts and pending actions, so nothing slips between shifts.",
+    "tags": [
+      "shift-handover",
+      "communication"
+    ],
+    "review": false,
+    "video": 10
+  },
+  {
+    "id": "4.2-002",
+    "examVersion": "CS0-004",
+    "objective": "4.2",
+    "type": "mcq",
+    "difficulty": 2,
+    "stem": "Night shift confirmed a compromised workstation and requested approval to isolate it. The approval arrived after shift change, but nobody on day shift acted on it, and the host kept beaconing for six hours. Which process failure BEST explains this?",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "A weak shift handover that didn't record the pending containment action and its owner",
+        "why": "Correct. Pending actions must be handed over explicitly, or they fall through the gap."
+      },
+      {
+        "id": "b",
+        "text": "Poor SIEM rule tuning",
+        "why": "Detection worked. The incident was already confirmed."
+      },
+      {
+        "id": "c",
+        "text": "Missing EDR coverage on the workstation",
+        "why": "The host was identified and could be isolated. The failure was in follow-through."
+      },
+      {
+        "id": "d",
+        "text": "An undocumented risk acceptance",
+        "why": "Nobody chose to accept this risk. The action was simply lost."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Weak handovers are a common real-world gap. Open incidents and pending actions, with owners, must transfer explicitly at shift change.",
+    "tags": [
+      "shift-handover"
+    ],
+    "review": false,
+    "video": 10
+  }
+]
