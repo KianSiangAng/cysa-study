@@ -67,15 +67,18 @@ Append to `src/data/questions/<domain-number>.json` (array):
   "correct": ["b"],
   "explanation": "…",
   "tags": ["vulnerability-prioritisation", "cvss"],
-  "review": false
+  "review": false,
+  "video": 14
 }
 ```
 
 - `id` = `<objective>-<3-digit sequence>`, unique.
 - `artifact` = string (code block content) for scenarios, otherwise null.
 - `correct` is an array even for single-answer questions.
+- `video` = the source video number (required; the app only quizzes watched videos).
 - Flashcards go to `src/data/flashcards/<domain-number>.json` with
-  `id, examVersion, objective, front, back, tags`.
+  `id, examVersion, objective, front, back, tags, video` (optional `review`).
+  Flashcard ids use an `fc-` prefix so they never collide with question ids: `fc-2.4-003`.
 
 ## After writing
 1. Run `npm run validate` and fix all errors.
