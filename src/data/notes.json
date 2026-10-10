@@ -1,0 +1,231 @@
+{
+  "videos": [
+    {
+      "n": 1,
+      "topic": "Welcome and Course Overview",
+      "objective": null
+    },
+    {
+      "n": 2,
+      "topic": "The Cybersecurity Analyst Role",
+      "objective": null
+    },
+    {
+      "n": 3,
+      "topic": "CySA+ CS0-004 Exam Structure and Domains",
+      "objective": null
+    },
+    {
+      "n": 4,
+      "topic": "Your Course Roadmap: How to Maximize Your Results",
+      "objective": null
+    },
+    {
+      "n": 5,
+      "topic": "Download your free study guide",
+      "objective": null
+    },
+    {
+      "n": 6,
+      "topic": "Introduction to Security Operations Centers (SOC)",
+      "objective": "1.5"
+    },
+    {
+      "n": 7,
+      "topic": "SOC Roles and Responsibilities",
+      "objective": "1.5"
+    },
+    {
+      "n": 8,
+      "topic": "Security Operations Workflows and Processes",
+      "objective": "1.5"
+    },
+    {
+      "n": 9,
+      "topic": "Continuous Monitoring Concepts",
+      "objective": "1.5"
+    },
+    {
+      "n": 10,
+      "topic": "Shift Operations and Handover Procedures",
+      "objective": "4.2"
+    },
+    {
+      "n": 11,
+      "topic": "Understanding Risk in Cybersecurity",
+      "objective": "2.4"
+    },
+    {
+      "n": 12,
+      "topic": "Risk Concepts: Appetite, Residual, and Inherent Risk",
+      "objective": "2.4"
+    },
+    {
+      "n": 13,
+      "topic": "Risk Management Strategies (Accept, Transfer, Avoid, Mitigate)",
+      "objective": "2.4"
+    },
+    {
+      "n": 14,
+      "topic": "Security Control Types",
+      "objective": "2.4"
+    },
+    {
+      "n": 15,
+      "topic": "Security Control Functions",
+      "objective": "2.4"
+    },
+    {
+      "n": 16,
+      "topic": "Policies, Governance, and Service-Level Objectives (SLOs)",
+      "objective": "2.4"
+    },
+    {
+      "n": 17,
+      "topic": "Aligning Controls with Business Risk",
+      "objective": "2.4"
+    },
+    {
+      "n": 18,
+      "topic": "Infrastructure and System Architecture Overview",
+      "objective": "1.1"
+    },
+    {
+      "n": 19,
+      "topic": "Cloud Native Architecture",
+      "objective": "1.1"
+    },
+    {
+      "n": 20,
+      "topic": "Virtualization Technologies and Security",
+      "objective": "1.1"
+    },
+    {
+      "n": 21,
+      "topic": "Containerization Concepts (Docker, Kubernetes)",
+      "objective": "1.1"
+    },
+    {
+      "n": 22,
+      "topic": "Application Programming Interfaces (API) Concepts",
+      "objective": "1.1"
+    },
+    {
+      "n": 23,
+      "topic": "Demo: Detecting API Enumeration Through Log Analysis (Ubuntu + Kali lab)",
+      "objective": "1.2"
+    },
+    {
+      "n": 24,
+      "topic": "Device Management Concepts",
+      "objective": "1.1"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "v6-9",
+      "title": "SOC basics",
+      "objective": "1.5",
+      "videos": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "markdown": "- A SOC's job: centralize detection, triage, and response so threats get caught and handled before they cause damage.\n- Typical tiering: Tier 1 (triage/alert monitoring) → Tier 2 (deeper investigation) → Tier 3 (threat hunting, advanced analysis) → SOC Manager (oversight, metrics, escalation ownership).\n- Core workflow: alert generated → triage (real or noise?) → investigation → escalation if needed → containment/remediation → documentation/closure.\n- **Continuous monitoring**: ongoing collection and analysis of security data (logs, network traffic, endpoint activity) so issues are caught in near-real-time rather than during periodic audits — feeds SIEM/alerting pipelines."
+    },
+    {
+      "id": "v18",
+      "title": "Infrastructure and System Architecture Overview",
+      "objective": "1.1",
+      "videos": [
+        18
+      ],
+      "markdown": "- **On-premises**: full control and full visibility, but also full responsibility for security.\n- **Cloud**: shifts physical infrastructure responsibility to the provider — but workloads, data, and IAM remain the customer's responsibility under the **shared responsibility model**.\n- **Hybrid** is the real-world norm — analysts must monitor and correlate events across both on-prem and cloud environments simultaneously.\n- **SDN (Software-Defined Networking)** separates the control plane from the data plane, giving centralized policy control and faster response. Know all 3 planes: **control, data, management**.\n- **IAM is the perimeter** in cloud/hybrid environments — a compromised identity is as dangerous as a compromised endpoint."
+    },
+    {
+      "id": "v19",
+      "title": "Cloud Native Architecture",
+      "objective": "1.1",
+      "videos": [
+        19
+      ],
+      "markdown": "- Built on microservices, serverless functions, containers, and APIs — each component is small, fast-moving, and potentially ephemeral. The **distributed attack surface** is the core challenge.\n- Shared responsibility model still applies: users are responsible for securing workloads and configurations even in a fully cloud-native environment.\n- **IaC (Infrastructure as Code) misconfigurations** are a top cloud attack vector — treat infra templates as code needing security review. Tools: Checkov, Prisma Cloud (catch issues pre-deployment).\n- Cloud-native monitoring needs cloud-native tools — know the platform-specific log sources: **AWS** = CloudTrail, VPC Flow Logs, GuardDuty; **Azure** = Sentinel, Defender for Cloud.\n- **MITRE ATT&CK Cloud Matrix** is the tactical reference for mapping cloud incidents to adversary behavior."
+    },
+    {
+      "id": "v20",
+      "title": "Virtualization Technologies and Security",
+      "objective": "1.1",
+      "videos": [
+        20
+      ],
+      "markdown": "- **Type 1 hypervisors**: run on bare metal, used in enterprise/cloud environments. **Type 2 hypervisors**: run on a host OS, used in lab/desktop environments.\n- **VM escape** = the highest-severity virtualization-specific attack — bypasses VM isolation, can expose all VMs on the same host. Mitigation: keep hypervisors patched.\n- **VM sprawl**: forgotten, unpatched VMs become easy targets. Mitigation: inventory VMs regularly, cross-reference against an active asset list.\n- **Snapshots** can expose sensitive data and persist malware states — monitor snapshot creation events as part of investigations.\n- **East-west traffic** between VMs doesn't cross the perimeter firewall — visibility at the virtual network layer needs micro-segmentation tools like VMware NSX."
+    },
+    {
+      "id": "v21",
+      "title": "Containerization Concepts — Docker, Kubernetes",
+      "objective": "1.1",
+      "videos": [
+        21
+      ],
+      "markdown": "- Containers share the host OS kernel — that shared kernel is the core security risk: a **container escape** can give an attacker access to the host and all other containers.\n- **Docker** manages individual containers. Image security is critical — scan images before deployment (Trivy, Prisma Cloud); never blindly pull from public registries.\n- **Kubernetes** orchestrates containers at scale. Top attack vectors: RBAC misconfigurations, exposed API servers, plaintext secrets.\n- **Falco** = runtime security monitoring for containers. **Kubernetes audit log** = API-level visibility into cluster activity. The two primary analyst tools in a containerized environment.\n- Never run containers as root in production — apply least privilege at the container level, same as any other system."
+    },
+    {
+      "id": "v22",
+      "title": "API Concepts",
+      "objective": "1.1",
+      "videos": [
+        22
+      ],
+      "markdown": "- APIs are the communication layer for modern apps. REST APIs over HTTP look like normal web traffic — makes API attacks hard to detect with traditional tools.\n- **OWASP API Security Top 10** is the reference for the most common/dangerous API vulns. Top issues: Broken Object Level Authorization (BOLA), Broken Authentication, lack of rate limiting.\n- **API keys and OAuth tokens** are the primary auth mechanisms. Key leakage and token theft are major attack vectors — monitor for API keys used from unexpected locations.\n- **API gateways** are the primary monitoring/control point for API activity — log everything, watch for auth failures, high request rates, and sequential enumeration patterns."
+    },
+    {
+      "id": "v24",
+      "title": "Device Management Concepts",
+      "objective": "1.1",
+      "videos": [
+        24
+      ],
+      "markdown": "- **MDM** (Mobile Device Management) manages full corporate devices — the primary control for mobile security. **MAM** (Mobile Application Management) manages only corporate apps and data — the right choice for **BYOD** scenarios.\n- **EDR** gives deep endpoint visibility, but only on managed, enrolled devices. Unmanaged devices are monitoring blind spots — a security risk and an exam topic.\n- **Zero trust conditional access** continuously verifies device posture before granting access to resources. Monitor conditional access logs for compliance failures and *unexpected successes*.\n- **IoT devices** are high risk and typically unmanageable with standard security tools — segment them away from corporate systems on a dedicated VLAN/network segment.\n- **UEM** (Unified Endpoint Management) is the modern platform for managing the full device fleet from a single console — the starting point for device inventory and compliance verification during investigations."
+    },
+    {
+      "id": "v11-14",
+      "title": "Risk fundamentals",
+      "objective": "2.4",
+      "videos": [
+        11,
+        12,
+        13,
+        14
+      ],
+      "markdown": "- Risk ≈ likelihood × impact of a threat exploiting a vulnerability.\n- **Inherent risk** = risk before any controls are applied. **Residual risk** = risk left over after controls are applied. **Risk appetite** = how much risk an org is willing to accept overall (set by leadership).\n- **Risk management strategies (the 4 T's, often taught as accept/transfer/avoid/mitigate)**:\n  - *Accept* — acknowledge and do nothing further (risk is within appetite / cost of fixing > cost of impact)\n  - *Transfer* — shift the risk elsewhere, e.g. cyber insurance, outsourcing\n  - *Avoid* — eliminate the risk entirely, e.g. discontinue the risky activity/system\n  - *Mitigate* — reduce likelihood or impact via controls\n- **Security control types** — two overlapping ways to categorize:\n  - By **category** (4 types, per the course): Managerial (policies, risk assessments, governance), Operational (day-to-day processes carried out by people, e.g. awareness training, incident handling), Technical (enforced by systems, e.g. firewalls, MFA, encryption), Physical (locks, badges, cameras, fencing). ⚠️ **Exam wording:** the official CS0-004 objectives (2.4) list only **3 control types — Administrative, Technical, Physical**. Administrative covers what the course splits into Managerial + Operational.\n  - By **function** (per vid 15): Preventive, Detective, Responsive, Corrective — this matches the official CS0-004 list (2.4) exactly. *Compensating controls* appear separately in 2.3 as a mitigation strategy."
+    },
+    {
+      "id": "v16",
+      "title": "Policies, Governance, and SLOs",
+      "objective": "2.4",
+      "videos": [
+        16
+      ],
+      "markdown": "- **Governance** = the overall framework of rules, roles, and decision-making that directs how an org manages security (sets direction, assigns accountability).\n- **Policies** sit under governance — formal, high-level statements of intent (e.g. an Acceptable Use Policy, Password Policy). Policies are supported by standards (mandatory specifics), procedures (step-by-step how-to), and guidelines (recommended, not mandatory).\n- **SLO (Service-Level Objective)** = a specific, measurable target within a broader SLA (Service-Level Agreement) — e.g. \"detect and triage critical alerts within 15 minutes.\" SLAs are the overall contract/commitment; SLOs are the individual measurable goals inside it."
+    },
+    {
+      "id": "v17",
+      "title": "Aligning Controls with Business Risk",
+      "objective": "2.4",
+      "videos": [
+        17
+      ],
+      "markdown": "- Starts with a **BIA (Business Impact Analysis)**: identifies which assets and functions are most critical to the org — the foundation for everything else.\n- Control selection driven by 3 questions: (1) does it address a real threat to a critical asset, (2) is it proportionate to the risk and asset value, (3) does it complement existing architecture.\n- **NIST CSF** gives the structural framework for a balanced program across 5 functions: Identify, Protect, Detect, Respond, Recover.\n- Control gaps must be handled deliberately — either escalate with a business case, or formally document a **risk acceptance** with accountability and a review date. Undocumented gaps = negligence, not strategy.\n- Communicating risk to leadership means translating technical findings into business impact language: revenue, reputation, regulatory exposure, customer trust — the terms that drive executive decisions."
+    },
+    {
+      "id": "v10",
+      "title": "Shift handover",
+      "objective": "4.2",
+      "videos": [
+        10
+      ],
+      "markdown": "- **Shift handover**: documenting open incidents, active alerts, and pending actions at end of shift so the next analyst isn't starting blind — a weak handover is a common real-world gap that lets things slip through."
+    }
+  ]
+}

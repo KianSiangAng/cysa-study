@@ -1,0 +1,13 @@
+[
+  {
+    "id": "fc-4.2-001",
+    "examVersion": "CS0-004",
+    "objective": "4.2",
+    "front": "What must a shift handover include?",
+    "back": "Open incidents (with status), active alerts, and pending actions with owners, so the next analyst doesn't start blind.",
+    "tags": [
+      "shift-handover"
+    ],
+    "video": 10
+  }
+]

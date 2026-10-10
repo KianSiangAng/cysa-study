@@ -1,0 +1,498 @@
+[
+  {
+    "id": "2.4-001",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "mcq",
+    "difficulty": 2,
+    "stem": "After deploying MFA and a next-generation firewall, the risk team re-assesses the customer portal. The risk that remains AFTER these controls is called:",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Inherent risk",
+        "why": "Inherent risk is the level before any controls are applied."
+      },
+      {
+        "id": "b",
+        "text": "Residual risk",
+        "why": "Correct. Residual risk is what's left once controls are in place."
+      },
+      {
+        "id": "c",
+        "text": "Risk appetite",
+        "why": "Appetite is how much risk leadership is willing to accept overall, not a measured level for one asset."
+      },
+      {
+        "id": "d",
+        "text": "Exposure factor",
+        "why": "A quantitative term for the share of an asset's value lost in an incident, not the risk left after controls."
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "Inherent risk is measured before controls and residual risk after them. Residual risk is then compared against the risk appetite set by leadership.",
+    "tags": [
+      "risk",
+      "residual-risk"
+    ],
+    "review": false,
+    "video": 14
+  },
+  {
+    "id": "2.4-002",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "scenario",
+    "difficulty": 2,
+    "stem": "Which entry in this risk register is an example of risk AVOIDANCE?",
+    "artifact": "Risk register (extract)\nID    Risk                                 Decision\nR-07  Legacy FTP file-drop exposes data    Service discontinued; partners no longer exchange files this way\nR-11  Ransomware recovery costs            Cyber insurance policy purchased\nR-14  Phishing of finance staff            MFA + awareness training rolled out\nR-19  Minor website defacement             Within appetite; no further action; reviewed yearly",
+    "options": [
+      {
+        "id": "a",
+        "text": "R-07",
+        "why": "Correct. The risky activity was stopped entirely, so the risk is gone rather than reduced."
+      },
+      {
+        "id": "b",
+        "text": "R-11",
+        "why": "Buying insurance shifts the financial impact to a third party. That's transfer."
+      },
+      {
+        "id": "c",
+        "text": "R-14",
+        "why": "MFA and training reduce likelihood and impact. That's mitigation."
+      },
+      {
+        "id": "d",
+        "text": "R-19",
+        "why": "Choosing no further action because the risk is within appetite is acceptance."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The four strategies: Accept (within appetite, do nothing further), Transfer (insurance, outsourcing), Avoid (stop the activity) and Mitigate (apply controls).",
+    "tags": [
+      "risk-management",
+      "avoid",
+      "transfer",
+      "accept",
+      "mitigate"
+    ],
+    "review": false,
+    "video": 14
+  },
+  {
+    "id": "2.4-003",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "mcq",
+    "difficulty": 2,
+    "stem": "Using the control types listed in the CS0-004 exam objectives, a mandatory annual security awareness training program is classified as which control type?",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Administrative",
+        "why": "Correct. Policies, procedures, training and governance are administrative controls in the exam's three-type scheme."
+      },
+      {
+        "id": "b",
+        "text": "Technical",
+        "why": "Technical controls are enforced by systems (firewalls, MFA, encryption). Training is carried out by people."
+      },
+      {
+        "id": "c",
+        "text": "Physical",
+        "why": "Physical controls are locks, badges, cameras and fencing."
+      },
+      {
+        "id": "d",
+        "text": "Compensating",
+        "why": "Compensating describes an alternative control used when the primary one isn't feasible. It isn't one of the three types."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "CS0-004 lists three control types: Administrative, Technical and Physical. The course splits Administrative into 'Managerial' and 'Operational'. On the exam, training is Administrative.",
+    "tags": [
+      "control-types",
+      "exam-wording"
+    ],
+    "review": false,
+    "video": 14
+  },
+  {
+    "id": "2.4-004",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "multi",
+    "difficulty": 2,
+    "stem": "A data centre installs badge readers at its doors and CCTV cameras in its corridors. Which TWO statements are correct? (Choose two.)",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Both are physical control types",
+        "why": "Correct. Both protect the physical environment."
+      },
+      {
+        "id": "b",
+        "text": "The badge reader's primary function is preventive",
+        "why": "Correct. It stops unauthorised people getting in."
+      },
+      {
+        "id": "c",
+        "text": "The CCTV camera's primary function is corrective",
+        "why": "CCTV records and reveals activity, so it's detective. Corrective controls restore systems after an incident."
+      },
+      {
+        "id": "d",
+        "text": "Both are administrative control types",
+        "why": "Administrative covers policies, procedures and training, not hardware at the door."
+      }
+    ],
+    "correct": [
+      "a",
+      "b"
+    ],
+    "explanation": "Classify a control two ways. Type: Administrative, Technical or Physical. Function: Preventive, Detective, Responsive or Corrective. A badge reader is physical and preventive; CCTV is physical and detective.",
+    "tags": [
+      "control-types",
+      "control-functions"
+    ],
+    "review": false,
+    "video": 14
+  },
+  {
+    "id": "2.4-005",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "mcq",
+    "difficulty": 2,
+    "stem": "An intrusion detection system raises an alert when it sees a known exploit signature but does not block the traffic. What is the control's function?",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Preventive",
+        "why": "It doesn't block anything. An inline IPS that drops the traffic would be preventive."
+      },
+      {
+        "id": "b",
+        "text": "Detective",
+        "why": "Correct. It identifies and reports the activity after it happens."
+      },
+      {
+        "id": "c",
+        "text": "Corrective",
+        "why": "Corrective controls restore normal operation after an incident, e.g. restoring from backup."
+      },
+      {
+        "id": "d",
+        "text": "Administrative",
+        "why": "Administrative is a control type, not a function, and an IDS is a technical control."
+      }
+    ],
+    "correct": [
+      "b"
+    ],
+    "explanation": "The CS0-004 control functions are Preventive, Detective, Responsive and Corrective. Watch for distractors that mix a type (Administrative/Technical/Physical) with a function.",
+    "tags": [
+      "control-functions",
+      "ids"
+    ],
+    "review": false,
+    "video": 14
+  },
+  {
+    "id": "2.4-006",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "mcq",
+    "difficulty": 2,
+    "stem": "A managed SOC contract commits the provider to a set of service terms, including 'critical alerts are triaged within 15 minutes'. That 15-minute target is BEST described as:",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "A service-level objective (SLO)",
+        "why": "Correct. An SLO is a specific, measurable target inside the broader agreement."
+      },
+      {
+        "id": "b",
+        "text": "A service-level agreement (SLA)",
+        "why": "The SLA is the overall contract or commitment that contains the SLOs."
+      },
+      {
+        "id": "c",
+        "text": "A security policy",
+        "why": "A policy is a high-level statement of intent, not a measurable service target."
+      },
+      {
+        "id": "d",
+        "text": "A guideline",
+        "why": "Guidelines are recommended, not mandatory, and aren't contractual targets."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The SLA is the overall commitment, and SLOs are the individual measurable goals inside it (e.g. triage within 15 minutes).",
+    "tags": [
+      "slo",
+      "sla"
+    ],
+    "review": false,
+    "video": 16
+  },
+  {
+    "id": "2.4-007",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "mcq",
+    "difficulty": 2,
+    "stem": "A document supporting the Password Policy states: 'All passwords MUST be at least 14 characters and include MFA for remote access.' What kind of document is this?",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "A standard",
+        "why": "Correct. Standards give the mandatory specifics that support a policy."
+      },
+      {
+        "id": "b",
+        "text": "A procedure",
+        "why": "Procedures are step-by-step how-to instructions, e.g. how to reset a password."
+      },
+      {
+        "id": "c",
+        "text": "A guideline",
+        "why": "Guidelines are recommendations. This text says MUST."
+      },
+      {
+        "id": "d",
+        "text": "A policy",
+        "why": "The policy is the high-level intent. This is the specific, mandatory detail beneath it."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "The hierarchy runs: governance sets direction, policies state intent, standards are mandatory specifics, procedures are steps, and guidelines are recommended.",
+    "tags": [
+      "policy",
+      "standards",
+      "governance"
+    ],
+    "review": false,
+    "video": 16
+  },
+  {
+    "id": "2.4-008",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "mcq",
+    "difficulty": 1,
+    "stem": "Which BEST describes security governance?",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "The framework of rules, roles and decision-making that sets security direction and assigns accountability",
+        "why": "Correct. Governance directs how the organisation manages security."
+      },
+      {
+        "id": "b",
+        "text": "Step-by-step instructions for performing a security task",
+        "why": "Those are procedures."
+      },
+      {
+        "id": "c",
+        "text": "Recommended but optional security practices",
+        "why": "Those are guidelines."
+      },
+      {
+        "id": "d",
+        "text": "The firewall and endpoint configurations deployed in production",
+        "why": "Those are technical controls and baselines, not governance."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Governance sits at the top: it sets direction and accountability, and policies, standards, procedures and guidelines all sit beneath it.",
+    "tags": [
+      "governance"
+    ],
+    "review": false,
+    "video": 16
+  },
+  {
+    "id": "2.4-009",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "mcq",
+    "difficulty": 2,
+    "stem": "A new CISO wants to choose controls that protect what matters most to the business. Which activity should come FIRST?",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "A business impact analysis (BIA) to identify the most critical assets and functions",
+        "why": "Correct. A BIA is the foundation. Without it, you can't judge which controls are proportionate."
+      },
+      {
+        "id": "b",
+        "text": "A penetration test of the external perimeter",
+        "why": "Useful, but it finds technical weaknesses without telling you what the business depends on most."
+      },
+      {
+        "id": "c",
+        "text": "CVSS scoring of every open vulnerability",
+        "why": "Severity scores lack business context until you know which assets are critical."
+      },
+      {
+        "id": "d",
+        "text": "Buying cyber insurance",
+        "why": "This transfers some risk, but it doesn't guide which controls to select."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Aligning controls with business risk starts with a BIA. Controls are then chosen by asking: does it address a real threat to a critical asset, is it proportionate, and does it fit the existing architecture?",
+    "tags": [
+      "bia",
+      "control-selection"
+    ],
+    "review": false,
+    "video": 17
+  },
+  {
+    "id": "2.4-010",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "mcq",
+    "difficulty": 3,
+    "stem": "An assessment finds that legacy lab systems can't support EDR, and there's no budget to replace them this year. What is the MOST appropriate way to handle this gap?",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Formally document a risk acceptance with a named owner and review date, or escalate with a business case",
+        "why": "Correct. Gaps must be handled deliberately: accepted with accountability, or escalated for funding."
+      },
+      {
+        "id": "b",
+        "text": "Leave the gap undocumented until budget is available",
+        "why": "An undocumented gap is negligence, not strategy."
+      },
+      {
+        "id": "c",
+        "text": "Remove the systems from the asset inventory so they don't affect metrics",
+        "why": "Hiding assets makes the risk invisible and worse."
+      },
+      {
+        "id": "d",
+        "text": "Mark the systems as compliant because replacement is already planned",
+        "why": "A plan isn't a control. This misreports the risk."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "When a control can't be applied, either escalate with a business case or record a formal risk acceptance with an owner and a review date.",
+    "tags": [
+      "risk-acceptance",
+      "control-gaps"
+    ],
+    "review": false,
+    "video": 17
+  },
+  {
+    "id": "2.4-011",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "scenario",
+    "difficulty": 3,
+    "stem": "The CISO asks an analyst to revise this draft before it goes to the executive committee. Which change will MOST help the executives make a decision?",
+    "artifact": "Draft: update to the executive committee\nSubject: Q3 control gaps\n\"We have 3 unmitigated findings: a CVSS 9.8 RCE on the payments\ngateway, no EDR telemetry on 40 POS terminals, and stale firewall\nrule sets. Recommend remediation.\"",
+    "options": [
+      {
+        "id": "a",
+        "text": "Restate each gap as business impact (e.g. potential payment outage, card-data breach costs, PCI DSS exposure) with the cost of fixing it",
+        "why": "Correct. Executives decide in terms of revenue, reputation, regulatory exposure and customer trust."
+      },
+      {
+        "id": "b",
+        "text": "Add the full CVSS vectors and raw scanner output",
+        "why": "More technical detail makes the message harder for this audience to act on."
+      },
+      {
+        "id": "c",
+        "text": "Remove the findings to avoid alarming the committee",
+        "why": "Hiding risk from decision-makers is the opposite of good governance."
+      },
+      {
+        "id": "d",
+        "text": "Send it to the IT operations team instead",
+        "why": "They can't approve budget or accept risk on the organisation's behalf."
+      }
+    ],
+    "correct": [
+      "a"
+    ],
+    "explanation": "Communicating risk to leadership means translating technical findings into business impact language, so executives can fund a fix or formally accept the risk.",
+    "tags": [
+      "risk-communication",
+      "executives"
+    ],
+    "review": false,
+    "video": 17
+  },
+  {
+    "id": "2.4-012",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "type": "multi",
+    "difficulty": 1,
+    "stem": "Which TWO of the following are functions of the NIST Cybersecurity Framework (CSF)? (Choose two.)",
+    "artifact": null,
+    "options": [
+      {
+        "id": "a",
+        "text": "Identify",
+        "why": "Correct. A core CSF function: understand assets, risks and the business context."
+      },
+      {
+        "id": "b",
+        "text": "Recover",
+        "why": "Correct. A core CSF function: restore capabilities after an incident."
+      },
+      {
+        "id": "c",
+        "text": "Contain",
+        "why": "Containment is an incident response phase, not a CSF function."
+      },
+      {
+        "id": "d",
+        "text": "Eradicate",
+        "why": "Eradication is an incident response phase, not a CSF function."
+      }
+    ],
+    "correct": [
+      "a",
+      "b"
+    ],
+    "explanation": "CSF functions: Identify, Protect, Detect, Respond and Recover. CSF 2.0 (2024) adds a sixth, Govern. Don't confuse them with IR phases like containment and eradication.",
+    "tags": [
+      "nist-csf"
+    ],
+    "review": false,
+    "video": 17
+  }
+]

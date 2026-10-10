@@ -1,0 +1,48 @@
+{
+  "examVersion": "CS0-004",
+  "domains": [
+    {
+      "id": "1",
+      "name": "Security Operations",
+      "weight": 34,
+      "objectives": [
+        { "id": "1.1", "name": "System and network architecture" },
+        { "id": "1.2", "name": "Indicators of malicious activity" },
+        { "id": "1.3", "name": "Tools to determine malicious activity" },
+        { "id": "1.4", "name": "Threat intelligence and threat hunting" },
+        { "id": "1.5", "name": "Efficiency and process improvement" },
+        { "id": "1.6", "name": "AI in security operations" }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Vulnerability Management",
+      "weight": 26,
+      "objectives": [
+        { "id": "2.1", "name": "Vulnerability scanning methods" },
+        { "id": "2.2", "name": "Vulnerability assessment tool output" },
+        { "id": "2.3", "name": "Prioritising and mitigating vulnerabilities" },
+        { "id": "2.4", "name": "Control types, risk concepts, AppSec, third-party risk" }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Incident Response and Management",
+      "weight": 24,
+      "objectives": [
+        { "id": "3.1", "name": "Attack methodology frameworks" },
+        { "id": "3.2", "name": "Incident response process" },
+        { "id": "3.3", "name": "Incident response techniques" }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Reporting and Communication",
+      "weight": 16,
+      "objectives": [
+        { "id": "4.1", "name": "Vulnerability management reporting and communication" },
+        { "id": "4.2", "name": "Security operations and IR reporting and communication" }
+      ]
+    }
+  ]
+}

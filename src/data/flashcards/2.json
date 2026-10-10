@@ -1,0 +1,104 @@
+[
+  {
+    "id": "fc-2.4-001",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "Inherent vs residual risk vs risk appetite",
+    "back": "Inherent: risk before controls.\nResidual: risk left after controls.\nAppetite: how much risk the organisation is willing to accept overall (set by leadership).",
+    "tags": [
+      "risk"
+    ],
+    "video": 14
+  },
+  {
+    "id": "fc-2.4-002",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "The four risk management strategies",
+    "back": "Accept: within appetite, no further action.\nTransfer: e.g. insurance, outsourcing.\nAvoid: stop the risky activity.\nMitigate: reduce likelihood or impact with controls.",
+    "tags": [
+      "risk-management"
+    ],
+    "video": 14
+  },
+  {
+    "id": "fc-2.4-003",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "CS0-004 control TYPES (exam wording)",
+    "back": "Administrative, Technical, Physical.\nThe course teaches four (Managerial and Operational instead of Administrative). Use the exam's three.",
+    "tags": [
+      "control-types",
+      "exam-wording"
+    ],
+    "video": 14
+  },
+  {
+    "id": "fc-2.4-004",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "CS0-004 control FUNCTIONS",
+    "back": "Preventive, Detective, Responsive, Corrective. (Compensating controls appear separately in 2.3, as a mitigation.)",
+    "tags": [
+      "control-functions"
+    ],
+    "video": 14
+  },
+  {
+    "id": "fc-2.4-005",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "SLA vs SLO",
+    "back": "SLA: the overall service agreement or commitment.\nSLO: a specific, measurable target within it, e.g. 'triage critical alerts within 15 min'.",
+    "tags": [
+      "sla",
+      "slo"
+    ],
+    "video": 16
+  },
+  {
+    "id": "fc-2.4-006",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "Policy vs standard vs procedure vs guideline",
+    "back": "Policy: high-level intent.\nStandard: mandatory specifics.\nProcedure: step-by-step how-to.\nGuideline: recommended, not mandatory.",
+    "tags": [
+      "policy",
+      "governance"
+    ],
+    "video": 16
+  },
+  {
+    "id": "fc-2.4-007",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "Business Impact Analysis (BIA)",
+    "back": "Identifies which assets and business functions are most critical. It is the foundation for choosing proportionate controls.",
+    "tags": [
+      "bia"
+    ],
+    "video": 17
+  },
+  {
+    "id": "fc-2.4-008",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "NIST CSF functions",
+    "back": "Identify, Protect, Detect, Respond, Recover. CSF 2.0 (2024) adds Govern.",
+    "tags": [
+      "nist-csf"
+    ],
+    "video": 17
+  },
+  {
+    "id": "fc-2.4-009",
+    "examVersion": "CS0-004",
+    "objective": "2.4",
+    "front": "How should a control gap you can't fix be handled?",
+    "back": "Deliberately: escalate with a business case, or document a formal risk acceptance with an owner and a review date. An undocumented gap is negligence.",
+    "tags": [
+      "risk-acceptance"
+    ],
+    "video": 17
+  }
+]
