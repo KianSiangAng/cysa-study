@@ -10,22 +10,22 @@
     "options": [
       {
         "id": "a",
-        "text": "A list of open incidents and their status, active alerts, and pending actions with owners",
+        "text": "Open incidents and their status, active alerts, and pending actions with owners",
         "why": "Correct. Without it, the next shift starts blind and work in progress gets dropped."
       },
       {
         "id": "b",
-        "text": "The night-shift analyst's personal opinion of the shift",
-        "why": "Subjective impressions don't help the next analyst act."
+        "text": "A count of alerts each analyst closed during the shift, broken down by severity",
+        "why": "A metric, not something to act on: it doesn't tell the day shift what's still open."
       },
       {
         "id": "c",
-        "text": "Full packet captures from the whole shift",
-        "why": "Raw data belongs in the case or evidence store, not in the handover summary."
+        "text": "Packet captures from the host that was 'acting weird', attached to the note",
+        "why": "Scope: evidence belongs in the case record. The handover should point to the open case and its status."
       },
       {
         "id": "d",
-        "text": "Every false positive closed in the past month",
+        "text": "A summary of every false positive closed over the past month for context",
         "why": "Historical noise isn't what the incoming shift needs to act on now."
       }
     ],
@@ -51,23 +51,23 @@
     "options": [
       {
         "id": "a",
-        "text": "A weak shift handover that didn't record the pending containment action and its owner",
+        "text": "A weak handover that didn't record the pending containment step and its owner",
         "why": "Correct. Pending actions must be handed over explicitly, or they fall through the gap."
       },
       {
         "id": "b",
-        "text": "Poor SIEM rule tuning",
-        "why": "Detection worked. The incident was already confirmed."
+        "text": "Detection rules that weren't tuned to alert on the host's beaconing traffic",
+        "why": "Detection wasn't the problem: the incident was already confirmed."
       },
       {
         "id": "c",
-        "text": "Missing EDR coverage on the workstation",
+        "text": "Missing EDR network-isolation capability on the affected workstation",
         "why": "The host was identified and could be isolated. The failure was in follow-through."
       },
       {
         "id": "d",
-        "text": "An undocumented risk acceptance",
-        "why": "Nobody chose to accept this risk. The action was simply lost."
+        "text": "An approval process too slow to authorise containment before shift change",
+        "why": "True, the approval came late, but it did arrive. The action was lost because the handover didn't carry it."
       }
     ],
     "correct": [
