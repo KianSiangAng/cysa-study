@@ -10,23 +10,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Reimage the finance server immediately to remove any attacker access.",
-        "why": "Containment before triage skips a step: you don't yet know whether this is a real incident, and reimaging destroys evidence."
+        "text": "Reimage the finance server now to remove any attacker foothold before it spreads",
+        "why": "Order: containment before triage. You don't yet know this is a real incident, and reimaging destroys the evidence you'd need."
       },
       {
         "id": "b",
-        "text": "Triage the alert: check the source, account, timing and context to decide whether it is a true positive.",
+        "text": "Triage the alert: check source, account, timing and context to confirm if it's real",
         "why": "Correct. Triage (real or noise?) comes right after an alert fires and decides whether to investigate further or close."
       },
       {
         "id": "c",
-        "text": "Close the alert as noise because the login eventually succeeded.",
-        "why": "A success after many failures is the classic sign of a guessed password. It is a reason to look closer, not to close."
+        "text": "Reset the account's password and notify the user their login may be compromised",
+        "why": "Order: a reasonable containment step, but taken before triage confirms anything. It also loses context, such as whether the source is a known device."
       },
       {
         "id": "d",
-        "text": "Escalate straight to the SOC manager before looking at it.",
-        "why": "The SOC manager owns oversight and escalation policy, not first-look triage. Escalating without triage wastes senior time."
+        "text": "Escalate to Tier 2 with the raw alert attached so a senior analyst can investigate",
+        "why": "Order: escalation follows triage. Passing up an untriaged alert spends Tier 2 time on something that may be noise."
       }
     ],
     "correct": [
@@ -51,22 +51,22 @@
     "options": [
       {
         "id": "a",
-        "text": "Proactive threat hunting for activity that hasn't triggered alerts",
+        "text": "Proactive threat hunting for activity that hasn't triggered any alerts",
         "why": "Correct. Hunting assumes compromise and searches beyond existing alerts, which is Tier 3 work."
       },
       {
         "id": "b",
-        "text": "Watching the alert queue and doing initial triage",
+        "text": "Monitoring the alert queue and performing first-pass triage on new alerts",
         "why": "This is the core Tier 1 job."
       },
       {
         "id": "c",
-        "text": "Advanced analysis such as reverse-engineering a malware sample",
+        "text": "Advanced analysis, such as reverse-engineering a malware sample",
         "why": "Correct. Deep technical analysis sits at Tier 3."
       },
       {
         "id": "d",
-        "text": "Owning SOC metrics and the escalation policy",
+        "text": "Owning the SOC's metrics, reporting and escalation policy",
         "why": "This is the SOC manager's role (oversight, metrics, escalation ownership), not an analyst tier."
       }
     ],
@@ -92,23 +92,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Tune the rule to exclude the known corporate VPN egress address, then keep tracking its true/false-positive rate.",
+        "text": "Tune the rule to exclude the known VPN egress address, then track its precision",
         "why": "Correct. The false positives share one known, benign cause. Tuning that out keeps the rule's real detections and frees triage time."
       },
       {
         "id": "b",
-        "text": "Disable the rule, since 62% of its alerts are false positives.",
-        "why": "It still caught 4 true positives. Turning it off removes detection completely."
+        "text": "Lower the rule's severity so its alerts queue quietly instead of paging",
+        "why": "Scope: it hides the noise instead of removing its cause, and the 4 true positives now get slower attention."
       },
       {
         "id": "c",
-        "text": "Hire more Tier 1 analysts to absorb the alert volume.",
-        "why": "This treats the symptom. The noise remains and triage still costs 41 minutes per alert."
+        "text": "Use a SOAR playbook to auto-close every alert this rule raises",
+        "why": "Scope: automating closure removes the triage cost, but it also closes the 4 true positives. Automation should target the known benign cause, not the whole rule."
       },
       {
         "id": "d",
-        "text": "Review this rule's alerts in a weekly batch instead of in real time.",
-        "why": "This gives up continuous monitoring, so a real impossible-travel login could go unanswered for days."
+        "text": "Batch-review this rule's alerts once a week instead of triaging them live",
+        "why": "Timing: it gives up continuous monitoring, so a real impossible-travel login could sit unanswered for days."
       }
     ],
     "correct": [
@@ -134,22 +134,22 @@
     "options": [
       {
         "id": "a",
-        "text": "Physical security of the provider's data centre",
+        "text": "Physical security of the provider's data centre and its staff access",
         "why": "The provider owns physical facilities in every cloud model."
       },
       {
         "id": "b",
-        "text": "Patching the hypervisors that host the virtual machines",
+        "text": "Patching the hypervisors that host the company's virtual machines",
         "why": "The IaaS provider manages the virtualisation layer."
       },
       {
         "id": "c",
-        "text": "Configuring IAM permissions and protecting the data in its workloads",
+        "text": "Configuring IAM permissions and protecting data in its workloads",
         "why": "Correct. Identities, configurations, workloads and data stay with the customer."
       },
       {
         "id": "d",
-        "text": "Replacing failed storage hardware",
+        "text": "Replacing failed disks in the provider's storage arrays",
         "why": "Hardware is the provider's responsibility."
       }
     ],
@@ -190,8 +190,8 @@
       },
       {
         "id": "d",
-        "text": "Data link layer (Layer 2)",
-        "why": "This is an OSI layer, not one of the three SDN planes."
+        "text": "Application plane",
+        "why": "Adjacent concept: true, some SDN models put applications above the controller, where they express intent through northbound APIs. But the controller itself operates in the control plane."
       }
     ],
     "correct": [
@@ -215,23 +215,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Treat j.tan's identity as compromised across both environments: disable the new access key and the account per the playbook, then investigate.",
-        "why": "Correct. The same external IP reached on-prem RDP and the cloud console without MFA, then created a persistent credential. The identity is the attack path, so contain it."
+        "text": "Contain j.tan's identity: disable the new access key and the account, then investigate",
+        "why": "Correct. The same external IP reached on-prem RDP and the cloud console without MFA, then created a persistent credential. The identity is the attack path, so contain it first."
       },
       {
         "id": "b",
-        "text": "Ignore the cloud events; the provider is responsible for securing console logins.",
-        "why": "Under shared responsibility, identities and IAM belong to the customer."
+        "text": "Pull 30 days of CloudTrail history for j.tan to scope the activity before changing anything",
+        "why": "Order: scoping is needed, but not before containment. The new access key gives the attacker persistent access while you search."
       },
       {
         "id": "c",
-        "text": "Block 203.0.113.50 at the on-prem perimeter firewall and close the case.",
-        "why": "The cloud console is reached over the internet, not through your perimeter. The new access key also works from any IP."
+        "text": "Block 203.0.113.50 at the on-prem perimeter firewall and monitor for new attempts",
+        "why": "Scope: the cloud console is reached over the internet, not through your perimeter, and the new access key works from any IP."
       },
       {
         "id": "d",
-        "text": "Open a ticket asking the cloud provider to investigate the login.",
-        "why": "The provider won't investigate your IAM users' activity for you. This delays containment."
+        "text": "Force a password reset for CORP\\j.tan in Active Directory and end the RDP session",
+        "why": "Scope: it shuts the on-prem path, but the cloud access key created at 02:18 stays valid even if the cloud identity is federated."
       }
     ],
     "correct": [
@@ -258,23 +258,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Scan IaC templates in the CI pipeline (e.g. with Checkov) and fail the build on public-exposure findings",
+        "text": "Scan IaC templates in the CI pipeline (e.g. Checkov) and fail builds on exposure",
         "why": "Correct. It catches the misconfiguration before deployment by treating infrastructure templates as code that needs security review."
       },
       {
         "id": "b",
-        "text": "Rely on GuardDuty to alert after resources are deployed",
-        "why": "This is a detective control that fires after exposure, and it isn't designed as a misconfiguration scanner."
+        "text": "Rely on GuardDuty findings to alert the team when a bucket becomes public",
+        "why": "Timing: true, GuardDuty can flag risky S3 changes, but only after deployment. By then the bucket is already exposed."
       },
       {
         "id": "c",
-        "text": "Have an engineer check the cloud console by hand after every deployment",
-        "why": "This happens after deployment and doesn't scale with frequent deploys."
+        "text": "Add a mandatory second reviewer to every Terraform pull request",
+        "why": "Scope: human review already missed this once. A second reviewer helps, but it won't consistently catch misconfigurations the way an automated policy check does."
       },
       {
         "id": "d",
-        "text": "Move the workload back on-premises",
-        "why": "This avoids the risk out of proportion to it, and the root cause (unchecked templates) isn't addressed."
+        "text": "Enable AWS Config rules that flag public buckets and auto-remediate them after deploy",
+        "why": "Timing: a strong backstop, but it acts after deployment. The template keeps producing the misconfiguration, and each deploy is briefly exposed."
       }
     ],
     "correct": [
@@ -348,18 +348,18 @@
       },
       {
         "id": "b",
-        "text": "OWASP API Security Top 10",
+        "text": "OWASP API Top 10",
         "why": "This lists API vulnerability classes, not adversary behaviour across an intrusion."
       },
       {
         "id": "c",
-        "text": "CVSS",
+        "text": "CVSS v4.0 base metrics",
         "why": "CVSS scores the severity of individual vulnerabilities. It doesn't map attacker behaviour."
       },
       {
         "id": "d",
-        "text": "NIST CSF",
-        "why": "This is a program-level framework (Identify, Protect…) and doesn't catalogue techniques."
+        "text": "NIST CSF 2.0 functions",
+        "why": "NIST CSF is a program-level framework (Govern, Identify, Protect…). It doesn't catalogue adversary techniques."
       }
     ],
     "correct": [
@@ -384,23 +384,23 @@
     "options": [
       {
         "id": "a",
-        "text": "The attack surface is distributed across many small, ephemeral components and APIs",
+        "text": "Its attack surface is spread across many small, short-lived components and APIs",
         "why": "Correct. Many fast-changing parts talk over APIs, so there is no single chokepoint to watch."
       },
       {
         "id": "b",
-        "text": "Cloud providers do not allow customers to collect logs from serverless functions",
-        "why": "False. Providers offer native logging for these services."
+        "text": "Service-to-service traffic is encrypted with mTLS, which hides payloads from sensors",
+        "why": "True, mTLS limits what network sensors can inspect, but it isn't the core reason. Even unencrypted, there's no single perimeter to watch across many short-lived components."
       },
       {
         "id": "c",
-        "text": "Serverless functions run on the customer's own hardware",
-        "why": "False. Serverless runs on provider-managed infrastructure."
+        "text": "The provider manages the serverless runtime, so runtime threats are its responsibility",
+        "why": "The first half is true: the provider manages the serverless runtime. But the customer still owns function code, permissions and configuration, and this doesn't explain why perimeter monitoring falls short."
       },
       {
         "id": "d",
-        "text": "The shared responsibility model no longer applies to cloud-native apps",
-        "why": "False. Customers still secure their workloads and configurations."
+        "text": "Containers are replaced so often that logs are lost before they can be collected",
+        "why": "True only when logs stay inside the container. Shipping them off centrally fixes that. It's a logging-design issue, not the reason perimeter monitoring falls short."
       }
     ],
     "correct": [
@@ -425,23 +425,23 @@
     "options": [
       {
         "id": "a",
-        "text": "VM escape; keep the hypervisor patched",
+        "text": "VM escape; keep the hypervisor patched and apply the vendor's fix",
         "why": "Correct. Breaking out of the guest's isolation is VM escape, the most severe virtualisation-specific attack. Patching the hypervisor closes it."
       },
       {
         "id": "b",
-        "text": "VM sprawl; inventory VMs against the asset list",
+        "text": "VM sprawl; inventory every VM and reconcile it against the asset list",
         "why": "Sprawl is about forgotten, unmanaged VMs, not breaking isolation."
       },
       {
         "id": "c",
-        "text": "VM escape; take snapshots of every guest",
-        "why": "Snapshots don't prevent escape, and they can hold sensitive data themselves."
+        "text": "VM escape; snapshot every guest so it can be rolled back if hit",
+        "why": "Right attack, wrong fix: snapshots help recovery but don't prevent the escape, and they can hold sensitive data themselves."
       },
       {
         "id": "d",
-        "text": "Container escape; stop running containers as root",
-        "why": "Wrong technology. This describes a hypervisor and guest VM, not containers."
+        "text": "Container escape; stop running workloads as root on the host",
+        "why": "Adjacent concept, wrong technology: the advisory describes a guest VM and a hypervisor, not containers."
       }
     ],
     "correct": [
@@ -466,23 +466,23 @@
     "options": [
       {
         "id": "a",
-        "text": "VM sprawl. Find owners for the unlisted VMs, then patch and register them, or decommission them.",
+        "text": "VM sprawl: find owners for the unlisted VMs, then patch and register or decommission them",
         "why": "Correct. Running VMs missing from the asset list, unpatched for years, are textbook sprawl and easy targets."
       },
       {
         "id": "b",
-        "text": "VM escape. Patch the hypervisor cluster immediately.",
-        "why": "Nothing here shows a guest breaking isolation."
+        "text": "VM escape risk: patch the prod-esx-02 hypervisors before anything else on the cluster",
+        "why": "Wrong problem: nothing shows a guest breaking isolation. Patching hypervisors is good hygiene but leaves two unowned, unpatched VMs running."
       },
       {
         "id": "c",
-        "text": "Nothing to fix. Test VMs are short-lived and don't need patching.",
-        "why": "These have been running for years. Unpatched and powered on, they are attackable."
+        "text": "VM sprawl: add the two VMs to the asset list now so the inventory matches the cluster",
+        "why": "Scope: it fixes the paperwork, not the risk. The VMs stay unpatched with nobody responsible for them."
       },
       {
         "id": "d",
-        "text": "Delete every unlisted VM immediately without contacting anyone.",
-        "why": "Deleting without checking ownership could destroy something the business needs. Gaps should be handled deliberately."
+        "text": "VM sprawl: run a credentialed vulnerability scan of the two unlisted VMs and file the report",
+        "why": "Order: the scan will confirm what's already clear (years unpatched), but with no owner nobody acts on the report. Find the owner first."
       }
     ],
     "correct": [
@@ -508,23 +508,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Micro-segmentation and monitoring at the virtual network layer (e.g. a distributed firewall such as VMware NSX)",
+        "text": "Micro-segmentation and monitoring at the virtual network layer, e.g. VMware NSX",
         "why": "Correct. East-west traffic between VMs never crosses the perimeter, so visibility has to come from inside the virtual network."
       },
       {
         "id": "b",
-        "text": "More rules on the perimeter firewall",
-        "why": "The traffic never reaches the perimeter, so new rules there will never see it."
+        "text": "Add deny-and-log rules for the two VMs' subnets on the perimeter firewall",
+        "why": "Scope: traffic between VMs on one host never reaches the perimeter, so these rules never see it."
       },
       {
         "id": "c",
-        "text": "Monitoring snapshot creation events",
-        "why": "Useful in investigations, but it doesn't show network traffic between VMs."
+        "text": "Enable NetFlow export on the core switch uplinks serving the hypervisor host",
+        "why": "Scope: NetFlow at the core sees traffic leaving the host. VM-to-VM traffic on the same host stays on the virtual switch."
       },
       {
         "id": "d",
-        "text": "Moving the VMs to a Type 2 hypervisor",
-        "why": "Type 2 hypervisors are for labs and desktops. This adds no visibility."
+        "text": "Review the hypervisor's snapshot-creation and VM-migration events for attacker activity",
+        "why": "True, these events matter in investigations, but they don't show network traffic between VMs."
       }
     ],
     "correct": [
@@ -550,23 +550,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Containers share the host OS kernel, so an escape can reach the host and every other container on it",
+        "text": "The host kernel is shared, so an escape can reach the host and all its other containers",
         "why": "Correct. The shared kernel is the core container risk."
       },
       {
         "id": "b",
-        "text": "Each container runs its own full OS kernel, so the attacker gets a second kernel",
-        "why": "Backwards. Containers don't have their own kernels; VMs do."
+        "text": "The image probably contains unpatched packages the attacker can exploit for access",
+        "why": "True, unpatched images are a common entry point, but that's how the container was compromised, not why breaking out has a bigger blast radius."
       },
       {
         "id": "c",
-        "text": "Containers cannot be monitored at runtime",
-        "why": "False. Tools such as Falco monitor container runtime behaviour."
+        "text": "Kubernetes reschedules the compromised container onto other nodes when it restarts",
+        "why": "False as stated: Kubernetes restarts pods from the image, not the attacker's running state. The wider impact comes from the shared kernel."
       },
       {
         "id": "d",
-        "text": "Container images are always pulled from public registries",
-        "why": "False, and it doesn't explain the blast radius of an escape."
+        "text": "The pod's service-account token gives the attacker cluster-admin rights over the cluster",
+        "why": "Only if RBAC is misconfigured. Service-account tokens are limited by RBAC and don't grant cluster-admin by default. Escape impact comes from the shared kernel."
       }
     ],
     "correct": [
@@ -591,23 +591,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Someone opened an interactive root shell in a production container. Check the Kubernetes audit log for who ran the exec, and contain the pod while investigating.",
+        "text": "Interactive root shell in prod: check the k8s audit log for who ran exec, then contain the pod",
         "why": "Correct. Interactive shells in production containers are rare and risky. The audit log shows the API-level who and how."
       },
       {
         "id": "b",
-        "text": "Benign. Falco raises this alert every time a container starts.",
-        "why": "False. This rule fires when a shell with a terminal is spawned, not at container start."
+        "text": "Delete the pod right away so the Deployment replaces it with a clean replica",
+        "why": "Order: it contains the threat but destroys the evidence (processes, files, memory) before you know who got in or how."
       },
       {
         "id": "c",
-        "text": "Rescan the image with Trivy and close the alert if no vulnerabilities are found",
-        "why": "An image scan says nothing about who is running commands in a live container. This skips the investigation."
+        "text": "Rescan the payments-api:2.3.1 image with Trivy and close the alert if it comes back clean",
+        "why": "Wrong phase: an image scan is a pre-deployment control. It says nothing about who is running commands in the live container."
       },
       {
         "id": "d",
-        "text": "Disable the rule to cut noise from production",
-        "why": "This removes visibility of one of the most important runtime signals."
+        "text": "Block registry.example.com at egress so no further compromised images can be pulled",
+        "why": "Scope: nothing shows the image is compromised, and the shell is already running. Blocking the registry doesn't touch the live session."
       }
     ],
     "correct": [
@@ -633,7 +633,7 @@
     "options": [
       {
         "id": "a",
-        "text": "Overly permissive RBAC role bindings",
+        "text": "Overly permissive RBAC role bindings granting broad cluster rights",
         "why": "Correct. RBAC misconfiguration is a top Kubernetes attack vector."
       },
       {
@@ -643,13 +643,13 @@
       },
       {
         "id": "c",
-        "text": "VM sprawl on the hypervisor cluster",
-        "why": "A virtualisation issue, not a Kubernetes-specific one."
+        "text": "Separate namespaces for each team's workloads within the same cluster",
+        "why": "Adjacent concept: namespaces are an isolation control, not an attack vector (though they don't enforce security boundaries by themselves)."
       },
       {
         "id": "d",
-        "text": "Type 2 hypervisors used in production",
-        "why": "This is about hypervisor choice, not Kubernetes."
+        "text": "Falco deployed as a DaemonSet so every node is monitored at runtime",
+        "why": "Adjacent concept: this is a detection control, not an attack vector."
       }
     ],
     "correct": [
@@ -676,23 +676,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Scan the image for vulnerabilities (e.g. with Trivy) and promote it through a trusted internal registry",
+        "text": "Scan it for vulnerabilities (e.g. Trivy) and promote it through a trusted internal registry",
         "why": "Correct. Scanning before deployment is the core image-security control."
       },
       {
         "id": "b",
-        "text": "Run the container as root to avoid permission errors",
-        "why": "The opposite of least privilege. Containers shouldn't run as root in production."
+        "text": "Sign the image with the team's key and push it to the internal registry for deployment",
+        "why": "Scope: signing proves where an image came from once you've accepted it. It doesn't find vulnerabilities or malware already inside it."
       },
       {
         "id": "c",
-        "text": "Deploy it and rely on Falco to catch problems",
-        "why": "Falco is runtime detection. A known-vulnerable image should be stopped before it runs."
+        "text": "Deploy it to staging and watch Falco runtime alerts for a week before promoting it",
+        "why": "Timing: Falco is runtime detection. Known-vulnerable packages should be caught by a scan before anything runs."
       },
       {
         "id": "d",
-        "text": "Trust it because of its high download count",
-        "why": "Popularity isn't a security control. Public images can be malicious or outdated."
+        "text": "Pin the image to a specific digest so the same version is deployed every time",
+        "why": "Reproducibility, not security: pinning a vulnerable image just deploys the same vulnerabilities consistently."
       }
     ],
     "correct": [
@@ -718,23 +718,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Enumeration exploiting Broken Object Level Authorization (BOLA): one customer's token is retrieving other customers' invoices",
+        "text": "BOLA enumeration: one customer's token is retrieving other customers' invoices",
         "why": "Correct. Sequential object IDs, all returning 200 to a single user, mean the API isn't checking that the caller owns each object."
       },
       {
         "id": "b",
-        "text": "Credential stuffing against the login endpoint",
-        "why": "The requests are already authenticated and target invoice objects, not the login endpoint."
+        "text": "Credential stuffing: breached passwords replayed against the API's login endpoint",
+        "why": "Scope: the requests are already authenticated and target invoice objects, not the login endpoint."
       },
       {
         "id": "c",
-        "text": "A volumetric denial-of-service attack",
-        "why": "About 5 requests per second retrieving data is data theft, not an attempt to exhaust capacity."
+        "text": "An unauthenticated scraper brute-forcing invoice IDs on a public endpoint",
+        "why": "Scope: every request is authenticated as cust_4410. The flaw is that the API doesn't check who owns each object."
       },
       {
         "id": "d",
-        "text": "Normal pagination by a client application",
-        "why": "Pagination uses page or offset parameters. Walking object IDs that belong to other customers is not normal behaviour."
+        "text": "Normal pagination by a client app syncing the customer's invoice history",
+        "why": "Pagination uses page or offset parameters over one customer's data. Walking sequential object IDs across customers isn't normal."
       }
     ],
     "correct": [
@@ -761,23 +761,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Revoke and rotate the key, then find out how it leaked and what data it accessed",
+        "text": "Revoke and rotate the key, then find how it leaked and what data it reached",
         "why": "Correct. A key used from an unexpected location while bulk-pulling customer data means stopping the exfiltration is the priority."
       },
       {
         "id": "b",
-        "text": "Add rate limiting to the customers endpoint",
-        "why": "This slows the theft but doesn't stop it. The key is still valid."
+        "text": "Add a rate limit to the customers endpoint to slow the bulk download",
+        "why": "Scope: this slows the theft but doesn't stop it. The key is still valid."
       },
       {
         "id": "c",
-        "text": "Block 192.0.2.15 at the gateway",
-        "why": "That's the legitimate service's address. It breaks billing and doesn't stop the attacker."
+        "text": "Block 203.0.113.200 at the API gateway and keep the key active for billing-sync",
+        "why": "Scope: the attacker can switch IP addresses. The stolen key keeps working from anywhere else."
       },
       {
         "id": "d",
-        "text": "Monitor for another hour to confirm the pattern",
-        "why": "Customer records are leaving right now. Waiting increases the damage."
+        "text": "Export the key's full request history to scope the exposure before changing anything",
+        "why": "Order: scoping matters, but customer records are leaving right now. Contain first, then scope."
       }
     ],
     "correct": [
@@ -803,23 +803,23 @@
     "options": [
       {
         "id": "a",
-        "text": "The API gateway",
+        "text": "The API gateway in front of the services",
         "why": "Correct. It sits in front of the APIs and can authenticate, rate-limit and log every call."
       },
       {
         "id": "b",
-        "text": "The perimeter firewall",
-        "why": "It sees encrypted HTTPS sessions, not API-level details like the endpoint, user or object ID."
+        "text": "The perimeter next-generation firewall",
+        "why": "It inspects sessions at the edge, but it can't authenticate, rate-limit or log per API key, user and object the way a gateway does."
       },
       {
         "id": "c",
-        "text": "EDR on developer laptops",
-        "why": "Endpoint telemetry doesn't capture partner API traffic."
+        "text": "EDR agents on the servers hosting the APIs",
+        "why": "Scope: EDR sees processes on the hosts, not API-level details, and it can't apply controls like rate limiting."
       },
       {
         "id": "d",
-        "text": "The hypervisor logs",
-        "why": "These record VM and host events, not API requests."
+        "text": "The SIEM, via forwarded web-server access logs",
+        "why": "True, a SIEM can correlate API logs, but it only observes. It can't authenticate, rate-limit or block calls."
       }
     ],
     "correct": [
@@ -844,23 +844,23 @@
     "options": [
       {
         "id": "a",
-        "text": "REST API calls travel over HTTP(S) and look like ordinary web traffic",
+        "text": "REST calls travel over HTTP(S) and look the same as ordinary web traffic",
         "why": "Correct. Without API-aware inspection, an attack request looks the same as a legitimate one."
       },
       {
         "id": "b",
-        "text": "APIs use proprietary non-IP protocols that tools can't parse",
-        "why": "False. REST APIs use standard HTTP over TCP/IP."
+        "text": "APIs usually listen on non-standard ports that firewalls don't watch",
+        "why": "False: most REST APIs use standard HTTPS on port 443, which is exactly why they blend in."
       },
       {
         "id": "c",
-        "text": "APIs are only reachable from inside the corporate network",
-        "why": "False. Many APIs are deliberately internet-facing."
+        "text": "APIs exchange binary formats like gRPC that IDS signatures can't decode",
+        "why": "Partly true for gRPC, but most APIs are REST with JSON over HTTPS. Their attacks are missed because they look like normal web traffic."
       },
       {
         "id": "d",
-        "text": "API traffic cannot be logged",
-        "why": "False. Gateways and applications can log API calls in detail."
+        "text": "Authenticated API calls are treated as trusted by network security tools",
+        "why": "A misconception: network tools don't see or trust API authentication. The problem is that malicious calls look like legitimate web requests."
       }
     ],
     "correct": [
@@ -885,23 +885,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Mobile Application Management (MAM) for the corporate apps and data",
+        "text": "Mobile Application Management (MAM) for corporate apps and data only",
         "why": "Correct. MAM manages only corporate apps and data, the right fit for BYOD."
       },
       {
         "id": "b",
-        "text": "Mobile Device Management (MDM) enrolment of each phone",
+        "text": "Mobile Device Management (MDM) enrolment of each contractor's phone",
         "why": "MDM manages the entire device, which goes beyond what Legal allows here."
       },
       {
         "id": "c",
-        "text": "Install EDR on the contractors' phones",
-        "why": "EDR doesn't address separating and controlling corporate data on a personal device."
+        "text": "An EDR-style mobile threat defence app installed on each phone",
+        "why": "Scope: it detects threats on the device but doesn't separate or control the corporate data."
       },
       {
         "id": "d",
-        "text": "Require full-device encryption and do nothing else",
-        "why": "Encryption protects data at rest but doesn't control or remove corporate data in apps."
+        "text": "Require full-device encryption and a PIN before email access",
+        "why": "Scope: this protects data at rest if the phone is lost, but can't control or remove corporate data in apps."
       }
     ],
     "correct": [
@@ -927,23 +927,23 @@
     "options": [
       {
         "id": "a",
-        "text": "08:11, k.wong: success from an unregistered, non-compliant device where no policy was applied",
+        "text": "08:11 k.wong: success from an unregistered, non-compliant device, policy not applied",
         "why": "Correct. An unexpected success is a gap in zero-trust enforcement, a possible bypass or misconfiguration."
       },
       {
         "id": "b",
-        "text": "08:03, r.osman: blocked from a non-compliant device",
+        "text": "08:03 r.osman: blocked sign-in from the non-compliant laptop LT-0377",
         "why": "The policy worked as intended. Follow up on the device's compliance later; it isn't the urgent item."
       },
       {
         "id": "c",
-        "text": "07:58, a.lim: compliant device, MFA satisfied",
-        "why": "A normal, expected sign-in."
+        "text": "07:58 a.lim: first sign-in of the day from LT-0412 with MFA satisfied",
+        "why": "A normal, expected sign-in: compliant device, MFA satisfied."
       },
       {
         "id": "d",
-        "text": "08:15, a.lim: second successful sign-in",
-        "why": "Repeated compliant, MFA-backed sign-ins are normal."
+        "text": "08:15 a.lim: second sign-in from LT-0412 within 20 minutes of the first",
+        "why": "Repeated compliant, MFA-backed sign-ins from the same device are normal."
       }
     ],
     "correct": [
@@ -969,23 +969,23 @@
     "options": [
       {
         "id": "a",
-        "text": "Put them on a dedicated, segmented VLAN with restricted access to corporate systems",
+        "text": "Put them on a dedicated, segmented VLAN with tightly restricted access",
         "why": "Correct. If you can't manage a device, contain it. Segmentation limits what a compromised IoT device can reach."
       },
       {
         "id": "b",
-        "text": "Install EDR agents on them anyway",
-        "why": "These devices typically can't run standard security agents."
+        "text": "Place them in the DMZ alongside the internet-facing web servers",
+        "why": "Wrong segment: the DMZ is for internet-facing services. IoT devices there are more exposed and sit next to servers you care about."
       },
       {
         "id": "c",
-        "text": "Enrol them in MAM",
-        "why": "MAM manages corporate apps on mobile devices. It doesn't apply to IoT sensors."
+        "text": "Enrol them in the UEM console so their compliance can be tracked",
+        "why": "The stem says they can't be enrolled. UEM needs a supported OS or agent, so it can't manage these devices."
       },
       {
         "id": "d",
-        "text": "Connect them to the main network; they hold no sensitive data",
-        "why": "They can still be a pivot point into systems that do hold sensitive data."
+        "text": "Keep them on the corporate VLAN but add them to the weekly vulnerability scans",
+        "why": "Scope: scanning finds weaknesses but doesn't limit what a compromised device can reach."
       }
     ],
     "correct": [
@@ -1010,23 +1010,23 @@
     "options": [
       {
         "id": "a",
-        "text": "The Unified Endpoint Management (UEM) console",
+        "text": "The UEM console covering the whole device fleet",
         "why": "Correct. UEM manages the whole device fleet from one console, the starting point for inventory and compliance checks."
       },
       {
         "id": "b",
-        "text": "The perimeter firewall logs",
+        "text": "The perimeter firewall's connection logs",
         "why": "These show connections at the edge, not device inventory or compliance state."
       },
       {
         "id": "c",
-        "text": "A vulnerability scan of the internet-facing range",
-        "why": "Wrong scope. It doesn't cover internal devices' compliance."
+        "text": "A vulnerability scan of the internal device range",
+        "why": "Timing and scope: a new scan shows today's vulnerabilities, not last week's access or each device's compliance."
       },
       {
         "id": "d",
-        "text": "Each user's browser history",
-        "why": "Not an authoritative or scalable source for device posture."
+        "text": "The file server's SMB access logs for last week",
+        "why": "True, these show which devices connected, but not whether each was patched and compliant."
       }
     ],
     "correct": [
