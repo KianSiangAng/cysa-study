@@ -34,11 +34,29 @@ analysis, so favour "what should the analyst do NEXT / FIRST / BEST" stems.
   CertMaster, Sybex, Dion, Messer or any published bank.
 - **Stem:** a realistic analyst situation, one clear question. No trick wording,
   no double negatives.
-- **Distractors:** each wrong option must be something a half-prepared candidate
-  would plausibly pick (a real tool used in the wrong phase, a correct action in the
-  wrong order, an adjacent concept). No joke options, no "all of the above".
+- **Distractors:** each wrong option must be something a competent analyst might
+  actually do or believe, wrong only because of:
+  - **order**: a real step done too early or too late (e.g. containment before triage,
+    scoping logs while exfiltration is still running);
+  - **scope**: fixes one environment or layer and misses the other (e.g. blocks the IP
+    but leaves the stolen key valid);
+  - **timing/phase**: the right tool in the wrong phase (e.g. runtime detection where a
+    pre-deployment scan is needed);
+  - **adjacent concept**: a real term from a neighbouring topic.
+  Never write reckless/destructive, unethical (hiding or misreporting risk), "do
+  nothing / ignore / wait and see", joke, or "all/none of the above" options.
+- **Truthful distractors:** if a distractor is a true statement that doesn't answer the
+  question, its `why` says so ("True, but…"). Never call a true statement false. A
+  distractor that is false must have a `why` stating the correct fact.
+- **Length and detail:** options are similar in length and detail (roughly 60–100
+  characters for sentence options; term-style options stay short and similar). The
+  correct option should be the longest in only about a quarter of questions, chosen at
+  random, and should not be the shortest by habit either. `npm run validate` warns when
+  the correct option is the longest or shortest in more than 40% of questions, or when a
+  question's options differ by more than 2× in length.
 - **Explanations:** explain why the correct answer is right AND one line on why
-  each distractor is wrong. This is where most of the learning happens.
+  each distractor is wrong (in its `why`, naming the order, scope, timing or concept
+  error). This is where most of the learning happens.
 - **Difficulty:** tag 1 (recall), 2 (apply), 3 (analyse/prioritise). Target mostly 2–3.
 - **Accuracy:** ports, protocols, CVSS metric names, ATT&CK technique IDs, tool
   flags and IR phase names must be exact. If you're not certain, set

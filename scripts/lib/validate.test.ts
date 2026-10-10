@@ -69,6 +69,32 @@ describe('validateContent', () => {
   })
 })
 
+describe('option length tells', () => {
+  const sized = (n: number, correctLen: number, otherLen: number) =>
+    q({
+      id: `2.4-${String(n).padStart(3, '0')}`,
+      options: ['a', 'b', 'c', 'd'].map((id) => ({ id, text: 'x'.repeat(id === 'b' ? correctLen : otherLen), why: 'w' })),
+    })
+
+  it('warns when the correct option is the strict longest in more than 40% of questions', () => {
+    const bank = [1, 2, 3, 4, 5].map((n) => sized(n, n <= 3 ? 90 : 70, 80)) // longest in 3/5 = 60%
+    expect(run(bank).warnings.join()).toMatch(/correct option is the longest in 60%/)
+    const fair = [1, 2, 3, 4, 5].map((n) => sized(n, n <= 2 ? 90 : 75, 80)) // longest 2/5, shortest 3/5
+    expect(run(fair).warnings.join()).not.toMatch(/the longest in/)
+    expect(run(fair).warnings.join()).toMatch(/correct option is the shortest in 60%/)
+  })
+
+  it('ignores ties when deciding the longest option', () => {
+    const tied = [1, 2, 3, 4, 5].map((n) => sized(n, 80, 80))
+    expect(run(tied).warnings.join()).not.toMatch(/option length gives/)
+  })
+
+  it('warns on a 2× length spread, but not for short term-style options', () => {
+    expect(run([sized(1, 100, 40)]).warnings.join()).toMatch(/vary more than 2×/)
+    expect(run([sized(1, 18, 6)]).warnings.join()).not.toMatch(/vary more than 2×/)
+  })
+})
+
 describe('statedAnswerCount', () => {
   it('reads words and digits', () => {
     expect(statedAnswerCount('(Choose TWO.)')).toBe(2)

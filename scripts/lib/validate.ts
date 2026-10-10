@@ -16,6 +16,18 @@ export interface ValidationResult {
 const NUMBER_WORDS: Record<string, number> = { two: 2, three: 3, four: 4 }
 /** Course-only control categories; CS0-004 uses Administrative/Technical/Physical. */
 const COURSE_WORDING = /\b(managerial|operational)\s+controls?\b/i
+/** A correct option shouldn't be the strict longest (or shortest) in more than this share of questions. */
+export const MAX_LENGTH_TELL = 0.4
+/** Options within one question shouldn't differ by more than 2× in length (term-style options exempt). */
+const TERM_STYLE_MAX = 20
+
+/** Option id that is uniquely the longest/shortest by text length, or null on a tie. */
+function strictExtreme(options: { id: string; text: string }[], pick: 'max' | 'min'): string | null {
+  const lens = options.map((o) => o.text.length)
+  const target = pick === 'max' ? Math.max(...lens) : Math.min(...lens)
+  const hits = options.filter((o) => o.text.length === target)
+  return hits.length === 1 ? hits[0].id : null
+}
 
 /** "Choose two", "(Select THREE)", "select 2" → the stated answer count, or null. */
 export function statedAnswerCount(stem: string): number | null {
@@ -32,6 +44,7 @@ export function validateContent(input: ContentInput): ValidationResult {
   const seenIds = new Set<string>()
   const counts: Record<string, number> = {}
   let reviewCount = 0
+  const lengthTells = { questions: 0, longest: 0, shortest: 0 }
 
   const checkCommon = (where: string, item: QuestionInput | FlashcardInput, domain: string, idPrefix: string) => {
     if (seenIds.has(item.id)) errors.push(`${where}: duplicate id ${item.id}`)
@@ -76,6 +89,13 @@ export function validateContent(input: ContentInput): ValidationResult {
         else if (stated !== q.correct.length)
           errors.push(`${at}: stem says choose ${stated} but ${q.correct.length} are correct`)
       }
+      const lens = q.options.map((o) => o.text.length)
+      const [min, max] = [Math.min(...lens), Math.max(...lens)]
+      if (max > TERM_STYLE_MAX && max > 2 * min) warnings.push(`${at}: option lengths vary more than 2× (${min}–${max} chars)`)
+      lengthTells.questions++
+      if (q.correct.includes(strictExtreme(q.options, 'max') ?? '')) lengthTells.longest++
+      if (q.correct.includes(strictExtreme(q.options, 'min') ?? '')) lengthTells.shortest++
+
       const text = [q.stem, ...q.options.map((o) => o.text), q.explanation].join(' ')
       if (COURSE_WORDING.test(text)) warnings.push(`${at}: uses course-only control wording; prefer exam terms`)
     })
@@ -96,6 +116,15 @@ export function validateContent(input: ContentInput): ValidationResult {
     })
   }
 
+  if (lengthTells.questions >= 5) {
+    for (const kind of ['longest', 'shortest'] as const) {
+      const share = lengthTells[kind] / lengthTells.questions
+      if (share > MAX_LENGTH_TELL)
+        warnings.push(
+          `The correct option is the ${kind} in ${Math.round(share * 100)}% of questions (max ${MAX_LENGTH_TELL * 100}%): option length gives the answer away`,
+        )
+    }
+  }
   if (reviewCount > 0) warnings.push(`${reviewCount} item(s) flagged review: true`)
   const total = Object.values(counts).reduce((a, b) => a + b, 0)
   if (total > 0) {
