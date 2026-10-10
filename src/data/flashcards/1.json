@@ -1,1 +1,203 @@
-[]
+[
+  {
+    "id": "fc-1.5-001",
+    "examVersion": "CS0-004",
+    "objective": "1.5",
+    "front": "What do SOC Tier 1, Tier 2, Tier 3 and the SOC manager each do?",
+    "back": "Tier 1: alert monitoring and triage.\nTier 2: deeper investigation.\nTier 3: threat hunting and advanced analysis.\nSOC manager: oversight, metrics, escalation ownership.",
+    "tags": [
+      "soc-tiers"
+    ],
+    "video": 9
+  },
+  {
+    "id": "fc-1.5-002",
+    "examVersion": "CS0-004",
+    "objective": "1.5",
+    "front": "Continuous monitoring",
+    "back": "Ongoing collection and analysis of security data (logs, network traffic, endpoint activity) so issues are caught in near-real-time rather than during periodic audits. It feeds SIEM and alerting.",
+    "tags": [
+      "continuous-monitoring"
+    ],
+    "video": 9
+  },
+  {
+    "id": "fc-1.1-001",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "Shared responsibility model: what does the customer always keep?",
+    "back": "Its data, identities and IAM, and the security of its workloads and configurations. The provider takes on physical infrastructure (and more, moving from IaaS to PaaS to SaaS).",
+    "tags": [
+      "shared-responsibility",
+      "cloud"
+    ],
+    "video": 18
+  },
+  {
+    "id": "fc-1.1-002",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "SDN: name the three planes",
+    "back": "Control plane: decides how traffic flows (the controller).\nData plane: forwards packets.\nManagement plane: administration and monitoring.",
+    "tags": [
+      "sdn"
+    ],
+    "video": 18
+  },
+  {
+    "id": "fc-1.1-003",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "AWS-native security log sources",
+    "back": "CloudTrail: API and console activity.\nVPC Flow Logs: network flow metadata.\nGuardDuty: managed threat detection.",
+    "tags": [
+      "aws",
+      "log-sources"
+    ],
+    "video": 19
+  },
+  {
+    "id": "fc-1.1-004",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "Azure-native security tooling",
+    "back": "Microsoft Sentinel: cloud SIEM/SOAR.\nDefender for Cloud: cloud security posture and workload protection.",
+    "tags": [
+      "azure",
+      "log-sources"
+    ],
+    "video": 19
+  },
+  {
+    "id": "fc-1.1-005",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "Why scan Infrastructure as Code, and with what?",
+    "back": "IaC misconfigurations are a top cloud attack vector, so treat templates as code that needs security review. Scan them before deployment with tools such as Checkov or Prisma Cloud.",
+    "tags": [
+      "iac",
+      "checkov"
+    ],
+    "video": 19
+  },
+  {
+    "id": "fc-1.1-006",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "Type 1 vs Type 2 hypervisor",
+    "back": "Type 1: bare metal; enterprise and cloud.\nType 2: runs on a host OS; labs and desktops.",
+    "tags": [
+      "virtualisation",
+      "hypervisor"
+    ],
+    "video": 20
+  },
+  {
+    "id": "fc-1.1-007",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "VM sprawl: risk and fix",
+    "back": "Forgotten, unpatched VMs become easy targets. Fix: inventory VMs regularly and cross-reference them with the active asset list.",
+    "tags": [
+      "virtualisation",
+      "vm-sprawl"
+    ],
+    "video": 20
+  },
+  {
+    "id": "fc-1.1-008",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "Why is a container escape so serious?",
+    "back": "Containers share the host OS kernel, so breaking out can expose the host and every other container on it.",
+    "tags": [
+      "containers",
+      "container-escape"
+    ],
+    "video": 21
+  },
+  {
+    "id": "fc-1.1-009",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "Falco vs Kubernetes audit log",
+    "back": "Falco: runtime security monitoring inside containers (e.g. a shell spawned).\nKubernetes audit log: API-level record of cluster activity (who did what through the API server).",
+    "tags": [
+      "falco",
+      "kubernetes"
+    ],
+    "video": 21
+  },
+  {
+    "id": "fc-1.1-010",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "Top Kubernetes attack vectors",
+    "back": "RBAC misconfigurations, exposed API servers, plaintext secrets.",
+    "tags": [
+      "kubernetes"
+    ],
+    "video": 21
+  },
+  {
+    "id": "fc-1.1-011",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "BOLA (Broken Object Level Authorization)",
+    "back": "The API doesn't check that the caller owns the object requested, so changing an ID (e.g. /invoices/1001 → 1002) returns other users' data. It tops the OWASP API Security Top 10.",
+    "tags": [
+      "api",
+      "bola",
+      "owasp-api"
+    ],
+    "video": 22
+  },
+  {
+    "id": "fc-1.1-012",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "Where should API activity be monitored, and for what?",
+    "back": "At the API gateway: log everything and watch for authentication failures, high request rates, sequential enumeration, and keys or tokens used from unexpected locations.",
+    "tags": [
+      "api",
+      "api-gateway"
+    ],
+    "video": 22
+  },
+  {
+    "id": "fc-1.1-013",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "MDM vs MAM",
+    "back": "MDM: manages the whole corporate device.\nMAM: manages only corporate apps and data. The right choice for BYOD.",
+    "tags": [
+      "mdm",
+      "mam",
+      "byod"
+    ],
+    "video": 24
+  },
+  {
+    "id": "fc-1.1-014",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "UEM (Unified Endpoint Management)",
+    "back": "A single console to manage the full device fleet. The starting point for device inventory and compliance checks during investigations.",
+    "tags": [
+      "uem"
+    ],
+    "video": 24
+  },
+  {
+    "id": "fc-1.1-015",
+    "examVersion": "CS0-004",
+    "objective": "1.1",
+    "front": "How should unmanageable IoT devices be handled?",
+    "back": "Segment them onto a dedicated VLAN or network segment, away from corporate systems.",
+    "tags": [
+      "iot",
+      "segmentation"
+    ],
+    "video": 24
+  }
+]
