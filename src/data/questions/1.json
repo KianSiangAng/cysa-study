@@ -692,7 +692,7 @@
       {
         "id": "d",
         "text": "Pin the image to a specific digest so the same version is deployed every time",
-        "why": "Reproducibility, not security: pinning a vulnerable image just deploys the same vulnerabilities consistently."
+        "why": "True, pinning a digest stops a tag being silently swapped, but it doesn't check what's inside: a vulnerable image just gets deployed consistently."
       }
     ],
     "correct": [
